@@ -30,11 +30,11 @@ def default():
     return ip_string
 
 def ping(address):
-    result = subprocess.run(['ping', "-c", "4", address], capture_output=True) #,stdout=subprocess.PIPE)
+    result = subprocess.run(['ping', "-c", "4", address], capture_output=True)
     
     if result.returncode == 0:
         print(f"Ping to {address} was successful:\n")
-        print(result.stdout)
+        # print(result.stdout)
     else:
         print(f"Ping to {address} failed with the following error message:\n")
         print(result.stderr)
@@ -62,14 +62,21 @@ def remote():
 #test dns resolution
 
 def dns():
-    ping("8.8.8.8")
+    ping("google.com")
     #use 8.8.8.8
 
+#making the program executable but not able to be edited
 
-    
-#Exit/quit the script
+def exec():
+    subprocess.run(["chmod", "+", "rx" ])
+    subprocess.run(["chmod", "-", "w" ])
+        
 
-def main():
+
+
+#Exit/quit the scripit
+
+def main(): #clear
     menu()
     print("enter your selection: ")
     val = input("")
@@ -85,10 +92,15 @@ def main():
         dns()
 
     elif val == "5":
+        subprocess.run(["clear"])
         exit()
+
     else:
         print("Please enter an option as listed")
-    main()
 
+    
 if __name__ == "__main__":
-    main()
+    exec()
+    subprocess.run(["clear"])
+    while True:
+       main()
