@@ -2,9 +2,11 @@
 
 #!/usr/bin/python3 
 
-# Kasey Kiggins
-# Kak8381@rit.edu
-#Date: 9/12/2023
+"""
+Kasey Kiggins
+Kak8381@rit.edu
+Date: 9/12/2023
+"""
 
 #add imports
 import subprocess
@@ -34,7 +36,7 @@ def ping(address):
     
     if result.returncode == 0:
         print(f"Ping to {address} was successful:\n")
-        # print(result.stdout)
+        
     else:
         print(f"Ping to {address} failed with the following error message:\n")
         print(result.stderr)
@@ -48,9 +50,6 @@ def local():
     ping(address)
     #ping default
 
-
-
-    return 0
 #test remote connectivity
 
 def remote():
