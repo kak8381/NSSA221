@@ -1,0 +1,28 @@
+	System Report Fri Oct  6 10:53:08 EDT 2023
+
+
+Device Information
+Hostname:		Domain:			
+
+Network Information
+IP Address: 		172.28.73.96
+Gateway:		172.28.64.1
+
+Network Mask:		255.255.240.0
+
+
+OS Information
+Operating System: 		GNU/Linux
+Operating Version:		5.10.16.3-microsoft-standard-WSL2
+Kernal Version:			#1 SMP Fri Apr 2 22:23:49 UTC 2021
+
+Storage Information
+Hard Drive Capacity:		251G
+
+Available Space:		232G
+
+
+Processor Information
+
+Memory Information
+5960184
