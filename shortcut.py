@@ -80,7 +80,7 @@ def report():
     linklist = os.popen("find " + dirname + " -type l").read().split("\n")
     print("The links you have in " + dirname + " are:")
     for i in range(0,len(linklist)):
-        print(i + "\n")
+        print(linklist[i] + "\n")
 
 def main():
     menu()
