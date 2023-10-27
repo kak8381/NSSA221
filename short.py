@@ -60,7 +60,7 @@ def report():
     directorylist = os.popen("ls" + dirname).read().split("\n")
     list = []
     for i in range(len(directorylist)):
-       links = os.readlink(dirname)
+       links = os.readlink(dirname + "/" + directorylist)
        list.append(links + "\n")
     print("The links you have in " + dirname + " are: \n"+ linklist)
     print("The links you have in " + dirname + " are: \n"+ list)
