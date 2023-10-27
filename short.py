@@ -44,40 +44,19 @@ def makelink(linkname,  path):
             print("Oh no! Could not find file, please make sure file exists so the link has something to point to.")
 
 def deletelink(linkname):
-    if os.path.exists(linkname):
+    linkpath = os.path.realpath(linkname)
+    if linkpath != False:
         #delete link
-        if os.path.isdir(linkname):
-            if os.path.islink(linkname):
-                os.unlink(linkname)
-            else:
-                shutil.rmtree(linkname)
-                print("Link successfully deleted!!")
-        else:
-            if os.path.islink(linkname):
-                os.unlink(linkname)
-            else:
-                removeobj(linkname)
+        os.unlink(linkpath)
+        print("Link successfully deleted!!")
             
     else:
         print("Oh no! Could not find link or file, please make sure link exists.")
 
-def removeobj(linkname):
-    var = input("Link was not found would you still like to remove this object?(yes/no)")
-    if var.islower() == "yes":
-        os.remove(linkname)
-        print("object deleted")
-    elif var.islower() == "no":
-        return 0
-    else:
-        print("please enter yes or no")
-        removeobj(linkname)
-
 def report():
-    dirname = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
-    linklist = os.popen("find " + dirname + " -type l").read().split("\n")
-    print("The links you have in " + dirname + " are:")
-    for i in range(0,len(linklist)):
-        print(linklist[i] + "\n")
+    dirname = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))
+    linklist = os.popen("ls -l " + dirname ).read()
+    print("The links you have in " + dirname + " are:"+ linklist)
 
 def main():
     menu()
@@ -97,6 +76,7 @@ def main():
         makelink(linkname, path)
     elif val == "2":
         linkname = input("Please enter a link you would like to delete:\n ")
+    
         deletelink(linkname)
     elif val == "3":
         report()
@@ -105,7 +85,6 @@ def main():
     else:
         subprocess.run(["clear"])
         print("please enter a usable value")
-        menu()
 
 if __name__ == "__main__":
 
