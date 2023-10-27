@@ -79,7 +79,7 @@ def main():
         else:
             if len(list_of_files) > 1:
                 for i in range(len(list_of_files)):
-                    print((i + 1) + ".) " + list_of_files[i])
+                    print(str(i + 1) + ".) " + list_of_files[i])
                 filechoice = input("Please select a file you would like to make a link with.")
                 if int(filechoice) < len(list_of_files):
                     path = list_of_files[int(filechoice)]
