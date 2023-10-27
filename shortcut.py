@@ -27,18 +27,24 @@ def menu():
         "\n3.) Run Report" +
         "\ntype quit to end")
 
-
+def find_file(filename):
+    for root, dirs, files in os.walk('/'):
+        if filename in files:
+            return os.path.join(root, filename)
+        else:
+            return False
 
 def makelink(filename):
-    if os.path.exists(filename):
+    var = input("What would you like to name the link?")
+    if find_file(filename) != False:
         print("Creating Link...")
         #make link
-        src = os.path.basename(filename)
+        src = find_file(filename)
         dst = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
         os.symlink(src, dst)
         print("Link successful!!")
     else:
-        print("Oh no! Could not find file, please make sure file exists.")
+        print("Oh no! Could not find file, please make sure file exists so the link has something to point to.")
 
 def deletelink(linkname):
     if os.path.exists(linkname):
