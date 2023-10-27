@@ -29,7 +29,6 @@ def menu():
 
 def makelink(linkname,  path):
     desktop_dir = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))
-    print(path)
     desktop_link = os.path.join(desktop_dir, os.path.basename(path))
     if os.path.exists(desktop_link):
         print("Link already exists.")
@@ -73,8 +72,11 @@ def main():
                 path = os.path.join(root, filename)
             else:
                 continue
-        linkname = input("What would you like the link to be named? \n")
-        makelink(linkname, path)
+        if len(path) < 3:
+            print("File not foud, or out of scope.")
+        else:
+            linkname = input("What would you like the link to be named? \n")
+            makelink(linkname, path)
     elif val == "2":
         linkname = input("Please enter a link you would like to delete:\n ")
     
