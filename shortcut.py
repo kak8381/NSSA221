@@ -27,17 +27,9 @@ def menu():
         "\n3.) Run Report" +
         "\ntype quit to end")
 
-def find_file(filename):
-    for root, dirs, files in os.walk('/'):
-        if filename in files:
-            print("File found!")
-            return os.path.join(root, filename)
-        else:
-            return False
-
-def makelink(filename):
+def makelink(filename, path):
     desktop_dir = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
-    desktop_link = os.path.join(desktop_dir, os.path.basename(find_file(filename)))
+    desktop_link = os.path.join(desktop_dir, os.path.basename(path))
     if os.path.exists(desktop_link):
         print("Link already exists.")
     else:
@@ -47,7 +39,7 @@ def makelink(filename):
             #make link
             
             try:
-                os.symlink(find_file(filename), desktop_link)
+                os.symlink(path, desktop_link)
                 print("Link successful!!")
             except:
                 print("An error occured")
@@ -92,11 +84,19 @@ def report():
 
 def main():
     menu()
+    path = ""
+   
     print("Enter you selection: ")
     val = input("")
     if val == "1":
         filename = input("Please enter a filename to make a link with:\n ")
-        makelink(filename)
+        for root, dirs, files in os.walk('/'):
+            if filename in files:
+                print("File found!")
+                path = os.path.join(root, filename)
+            else:
+                print("file not found")
+        makelink(filename, path)
     elif val == "2":
         linkname = input("Please enter a link you would like to delete:\n ")
         deletelink(linkname)
