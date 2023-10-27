@@ -19,7 +19,7 @@ import os
 
 #command line menu
 def menu():
-    directory = os.popen("cd").read()
+    directory = os.popen("pwd").read()
     print("You are currently in " + directory +
         "\nPlease pick an option:" + 
         "\n1.) Make symbolic link" +
@@ -30,21 +30,29 @@ def menu():
 def find_file(filename):
     for root, dirs, files in os.walk('/'):
         if filename in files:
+            print("File found!")
             return os.path.join(root, filename)
         else:
             return False
 
 def makelink(filename):
-    var = input("What would you like to name the link?")
-    if find_file(filename) != False:
-        print("Creating Link...")
-        #make link
-        src = find_file(filename)
-        dst = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
-        os.symlink(src, dst)
-        print("Link successful!!")
+    desktop_link = os.path.join(desktop_dir, os.path.basename(find_file(filename)))
+    desktop_dir = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+    if os.path.exists(desktop_link):
+        print("Link already exists.")
     else:
-        print("Oh no! Could not find file, please make sure file exists so the link has something to point to.")
+        
+        if find_file(filename) != False:
+            print("Creating Link...")
+            #make link
+            
+            try:
+                os.symlink(find_file(filename), desktop_link)
+                print("Link successful!!")
+            except:
+                print("An error occured")
+        else:
+            print("Oh no! Could not find file, please make sure file exists so the link has something to point to.")
 
 def deletelink(linkname):
     if os.path.exists(linkname):
