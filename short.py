@@ -52,7 +52,7 @@ def deletelink(linkname):
         print("Link successfully deleted!!")
             
     else:
-        print("Oh no! Could not find link or file, please make sure link exists.")
+        print("Oh no! Could not find link or file, please make sure link exists.\n")
 
 def report():
     dirname = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))#path to desktop
@@ -69,14 +69,14 @@ def main():
         filename = input("Please enter a filename to make a link with:\n ")
         for root, dirs, files in os.walk('/'):
             if filename in files:
-                print("File found!")
                 path = os.path.join(root, filename)
                 list_of_files.append(path)
             else:
                 continue
         if len(path) < 3:
-            print("File not foud, or out of scope.")
+            print("File not found, or out of scope.")
         else:
+            print("File found!")
             if len(list_of_files) > 1:
                 for i in range(len(list_of_files)):
                     print(str(i + 1) + ".) " + list_of_files[i])
