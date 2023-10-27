@@ -95,7 +95,7 @@ def main():
                 print("File found!")
                 path = os.path.join(root, filename)
             else:
-                print("file not found")
+                continue
         makelink(filename, path)
     elif val == "2":
         linkname = input("Please enter a link you would like to delete:\n ")
