@@ -62,6 +62,7 @@ def report():
 def main():
     menu()
     path = ""
+    list_of_files = []
     print("Enter you selection: ")
     val = input("")
     if val == "1":
@@ -70,11 +71,20 @@ def main():
             if filename in files:
                 print("File found!")
                 path = os.path.join(root, filename)
+                list_of_files.append(path)
             else:
                 continue
         if len(path) < 3:
             print("File not foud, or out of scope.")
         else:
+            if len(list_of_files) > 1:
+                for i in range(len(list_of_files)):
+                    print((i + 1) + ".) " + list_of_files[i])
+                filechoice = input("Please select a file you would like to make a link with.")
+                if int(filechoice) < len(list_of_files):
+                    path = list_of_files[int(filechoice)]
+                else:
+                    print("incorrect input")
             linkname = input("What would you like the link to be named? \n")
             makelink(linkname, path)
     elif val == "2":
