@@ -48,7 +48,7 @@ def deletelink(linkname):
     desktop_dir = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))
     if linkpath != False:
         #delete link
-        os.unlink(desktop_dir + "/" + linkpath)
+        os.unlink(desktop_dir + linkpath)
         print("Link successfully deleted!!")
             
     else:
@@ -57,7 +57,7 @@ def deletelink(linkname):
 def report():
     dirname = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))
     linklist = os.popen("ls -l " + dirname ).read()
-    print("The links you have in " + dirname + " are:"+ linklist)
+    print("The links you have in " + dirname + " are: \n"+ linklist)
 
 def main():
     menu()
