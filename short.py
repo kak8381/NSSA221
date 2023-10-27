@@ -29,7 +29,7 @@ def menu():
 
 def makelink(linkname,  path):
     desktop_dir = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))
-    print(desktop_dir)
+    print(path)
     desktop_link = os.path.join(desktop_dir, os.path.basename(path))
     if os.path.exists(desktop_link):
         print("Link already exists.")
