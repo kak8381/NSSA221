@@ -57,13 +57,7 @@ def deletelink(linkname):
 def report():
     dirname = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))#path to desktop
     linklist = os.popen("ls -l " + dirname ).read()#command to print list of links
-    directorylist = os.popen("ls" + dirname).read().split("\n")
-    list = []
-    for i in range(len(directorylist)):
-       links = os.readlink(dirname + "/" + directorylist[i])
-       list.append(links + "\n")
     print("The links you have in " + dirname + " are: \n"+ linklist)
-    print("The links you have in " + dirname + " are: \n"+ list)
 
 def main():
     menu()
