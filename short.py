@@ -48,7 +48,7 @@ def deletelink(linkname):
     desktop_dir = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))
     if linkpath != False:
         #delete link
-        os.unlink(desktop_dir + linkpath)
+        os.unlink(desktop_dir + "/" + linkname)
         print("Link successfully deleted!!")
             
     else:
