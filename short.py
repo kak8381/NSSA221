@@ -45,9 +45,10 @@ def makelink(linkname,  path):
 
 def deletelink(linkname):
     linkpath = os.path.realpath(linkname)
+    desktop_dir = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))
     if linkpath != False:
         #delete link
-        os.unlink(linkpath)
+        os.unlink(desktop_dir + "/" + linkpath)
         print("Link successfully deleted!!")
             
     else:
