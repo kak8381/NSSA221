@@ -38,7 +38,7 @@ def makelink(linkname,  path):
         if path != False:
             print("Creating Link...")
             #make link
-            os.popen("ln -s " + path + " " + desktop_dir + linkname)
+            os.popen("ln -s " + path + " " + desktop_dir +"/"+ linkname)
             print("Link successful!!")
         else:
             print("Oh no! Could not find file, please make sure file exists so the link has something to point to.")
