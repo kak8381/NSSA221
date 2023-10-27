@@ -27,24 +27,25 @@ def menu():
         "\n3.) Run Report" +
         "\ntype quit to end")
 
+#making the link
 def makelink(linkname,  path):
-    desktop_dir = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))
-    desktop_link = os.path.join(desktop_dir, os.path.basename(path))
-    if os.path.exists(desktop_link):
+    desktop_dir = os.path.join(os.path.join(os.path.expanduser('~/Desktop'))) #path to desktop
+    desktop_link = os.path.join(desktop_dir, os.path.basename(path))#path to link if it exists
+    if os.path.exists(desktop_link):#check it link exists
         print("Link already exists.")
     else:
-        
+    #creating the link 
         if path != False:
             print("Creating Link...")
             #make link
-            os.popen("ln -s " + path + " " + desktop_dir +"/"+ linkname)
+            os.popen("ln -s " + path + " " + desktop_dir +"/"+ linkname)#command to make link
             print("Link successful!!")
         else:
             print("Oh no! Could not find file, please make sure file exists so the link has something to point to.")
 
 def deletelink(linkname):
-    linkpath = os.path.realpath(linkname)
-    desktop_dir = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))
+    linkpath = os.path.realpath(linkname)#path to link
+    desktop_dir = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))#path to desktop
     if linkpath != False:
         #delete link
         os.unlink(desktop_dir + "/" + linkname)
@@ -54,14 +55,13 @@ def deletelink(linkname):
         print("Oh no! Could not find link or file, please make sure link exists.")
 
 def report():
-    dirname = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))
-    linklist = os.popen("ls -l " + dirname ).read()
+    dirname = os.path.join(os.path.join(os.path.expanduser('~/Desktop')))#path to desktop
+    linklist = os.popen("ls -l " + dirname ).read()#command to print list of links
     print("The links you have in " + dirname + " are: \n"+ linklist)
 
 def main():
     menu()
     path = ""
-   
     print("Enter you selection: ")
     val = input("")
     if val == "1":
