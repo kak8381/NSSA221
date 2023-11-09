@@ -23,12 +23,13 @@ ip_counts = {}
 #reading the files
 def file_read():
     try:
-        with open("syslog.log", 'r') as file:
+        with open("syslog(1).log", 'r') as file:
             file_contents = file.read()
             #split file into only ip address by regex
-            ip_address = re.findall(ip_pattern, file_contents)
+            ip_address = re.findall("Failed password for"+ r".*" + ip_pattern, file_contents)
             #put ips in dictionary to count
             for ip in ip_address:
+                ip = str(ip)[str(ip).index("from ")+5:]
                 if ip in ip_counts:
                     ip_counts[ip] += 1
                 else:
@@ -37,16 +38,21 @@ def file_read():
             sorted_ip_counts = dict(sorted(ip_counts.items(), key=itemgetter(1)))
             for ip, count in sorted_ip_counts.items():
                 #print in format
-                country = {ip}.country
-                print(f"{count}\t\t + {ip}\t\t" + country)
+                if count < 20:
+                    continue
+                #country = geolite2.lookup(str(ip))
+                else:
+                    print(f"{count}\t + {ip}\t\t" )#+ country.country)
+            return file_contents
            
 
     except FileNotFoundError:
         print("The file syslog.log was not found please check the name or path of the file.")
-    return file_contents
+    
 
 
 def main():
+    print("Count\t\t" + "IP\t\t" + "Country")
     file_read()
 
 if __name__ == "__main__":
