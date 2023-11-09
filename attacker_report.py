@@ -23,7 +23,7 @@ ip_counts = {}
 #reading the files
 def file_read():
     try:
-        with open("syslog(1).log", 'r') as file:
+        with open("syslog.log", 'r') as file:
             file_contents = file.read()
             #split file into only ip address by regex
             ip_address = re.findall("Failed password for"+ r".*" + ip_pattern, file_contents)
@@ -38,11 +38,19 @@ def file_read():
             sorted_ip_counts = dict(sorted(ip_counts.items(), key=itemgetter(1)))
             for ip, count in sorted_ip_counts.items():
                 #print in format
-                if count < 20:
-                    continue
-                #country = geolite2.lookup(str(ip))
+                country = geolite2.lookup(str(ip))
+                if country == "None":
+                    country = "unknown location"
                 else:
-                    print(f"{count}\t + {ip}\t\t" )#+ country.country)
+                    if count < 20:
+                        continue
+                
+                    else:
+                        country = geolite2.lookup(str(ip))
+                        if country == "None":
+                            country = "unknown location"
+                        else:
+                            print(f"{count}\t + {ip}\t\t" + country.country)
             return file_contents
            
 
@@ -52,6 +60,8 @@ def file_read():
 
 
 def main():
+    date = os.popen("date").read()
+    print("Attacker Report - "+ date + "\n")
     print("Count\t\t" + "IP\t\t" + "Country")
     file_read()
 
